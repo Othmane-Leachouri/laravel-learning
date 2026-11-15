@@ -1,0 +1,17 @@
+{
+    "name": "othmane/laravel-learning",
+    "description": "A project to learn PHP and Laravel development.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Othmane\\LaravelLearning\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Othmane Leachouri",
+            "email": "119798862+Othmane-Leachouri@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
