@@ -65,22 +65,51 @@ function estPremier(int $n): bool {
 }
 
 
-// Tests des fonctions
+// 1. Calculer le prix TTC
+function calculerTTC(float $ht, float $tva = 20.0): float {
+    return $ht + ($ht * $tva / 100);
+}
 
-echo "Est pair : ";
-var_dump(estPair(8));
+// 2. Calculer le prix après remise
+function calculerRemise(float $prix, float $pourcentage): float {
+    $prixFinal = $prix - ($prix * $pourcentage / 100);
 
-echo "Est positif : ";
-var_dump(estPositif(5));
+    return round($prixFinal, 2);
+}
 
-echo "Maximum sans max() : ";
-echo maximum(10, 25, 15);
+// 3. Calculer le montant total de la facture
+function calculerFacture(
+    float $prixUnitaire,
+    int $quantite,
+    float $remise = 0,
+    float $tva = 20.0
+): float {
 
-echo "\nMaximum avec max() : ";
-echo maximumAvecMax(10, 25, 15);
+    $totalHT = $prixUnitaire * $quantite;
 
-echo "\nEst premier : ";
-var_dump(estPremier(7));
+    $totalApresRemise = calculerRemise($totalHT, $remise);
+
+    return calculerTTC($totalApresRemise, $tva);
+}
+
+// 4. Affichage des résultats
+
+$ht = 100;
+$tva = 20;
+
+$prixTTC = calculerTTC($ht, $tva);
+
+echo "Prix TTC : " .
+    number_format($prixTTC, 2, ",", " ") . " MAD";
+
+echo "\nPrix après remise : " .
+    number_format(calculerRemise(100, 10), 2, ",", " ") . " MAD";
+
+$facture = calculerFacture(100, 10, 10, 20);
+
+echo "\nTotal facture : " .
+    number_format($facture, 2, ",", " ") . " MAD";
+
 
 ?>
 
